@@ -32,9 +32,19 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 120px;
+  height: 75vh;
 }
-
+.divCount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.divCount > div {
+  width: 100%;
+  height: 100px;
+}
 /* COUNTER */
 
 .hide {
@@ -96,10 +106,16 @@ div > button {
   width: 30px;
   height: 30px;
 }
+.suppACounter > button,
 .addACount > button {
   width: 120px;
   height: 65px;
   color: white;
+}
+.addACountFake,
+.suppACounterFake {
+  width: 120px;
+  height: 65px;
 }
 button:active {
   background-color: rgb(92, 71, 211, 0.7);
@@ -127,3 +143,18 @@ footer {
     align-items: center;
   }
 }
+/* BREAKPOINTS */
+
+/* @media all and (min-width : 576px) {} */
+
+/* @media all and (min-width : 768px) {} */
+
+@media all and (min-width: 992px) {
+  .main {
+    flex-direction: row !important;
+  }
+}
+
+/* @media all and (min-width : 1200px) {} */
+
+/* @media all and (min-width : 1400px) {} */

@@ -3,7 +3,7 @@
    License: none (public domain)
 */
 :root {
-  --titleColor: #5C47D3;
+  --titleColor: #5c47d3;
 }
 
 html,
@@ -93,6 +93,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  box-sizing: border-box;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -128,7 +129,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 

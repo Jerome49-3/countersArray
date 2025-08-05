@@ -20,15 +20,23 @@ const Counter = (props) => {
   return (
     <>
       <div className="addACount">
-        <button
-          onClick={() => {
-            const newCounter = [...count];
-            newCounter.push(0);
-            setCount(newCounter);
-          }}
-        >
-          add a counter
-        </button>
+        {count.length <= 7 ? (
+          <>
+            <button
+              onClick={() => {
+                const newCounter = [...count];
+                newCounter.push(0);
+                setCount(newCounter);
+              }}
+            >
+              add a counter
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="addACountFake"></div>
+          </>
+        )}
       </div>
       <div>
         {count.map((counter, index) => {
@@ -82,6 +90,25 @@ const Counter = (props) => {
             </div>
           );
         })}
+      </div>
+      <div className="suppACounter">
+        {count.length > 0 ? (
+          <>
+            <button
+              onClick={() => {
+                const newCounter = [...count];
+                newCounter.pop(0);
+                setCount(newCounter);
+              }}
+            >
+              supp a counter
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="suppACounterFake"></div>
+          </>
+        )}
       </div>
     </>
   );
