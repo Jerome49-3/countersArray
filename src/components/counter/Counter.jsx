@@ -1,10 +1,11 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Counter = (props) => {
   // const { classBoxCount } = props
+  const [totalIsDefined, setTotalIsDefined] = useState(false);
   const [count, setCount] = useState(() => {
     const isInStorage = localStorage.getItem("count");
-    console.log("isInStorage:", isInStorage);
+    // console.log("isInStorage:", isInStorage);
 
     if (isInStorage) {
       return JSON.parse(isInStorage);
@@ -12,9 +13,10 @@ const Counter = (props) => {
       return [];
     }
   });
+  console.log("count:", count);
   const [total, setTotal] = useState(() => {
     const isInStorage = localStorage.getItem("count");
-    console.log("isInStorage:", isInStorage);
+    // console.log("isInStorage:", isInStorage);
 
     if (isInStorage) {
       return JSON.parse(isInStorage);
@@ -22,7 +24,7 @@ const Counter = (props) => {
       return [];
     }
   });
-  useLayoutEffect(() => {
+  useEffect(() => {
     let newEl = 0;
     {
       count.forEach((el, index) => {
@@ -66,8 +68,13 @@ const Counter = (props) => {
               <button
                 onClick={() => {
                   const newCounter = [...count];
-                  newCounter.pop(0);
+                  newCounter.pop();
+                  if (count.length === 1 && count[0] > 0 && total > 0) {
+                    setTotal(0);
+                    setCount([]);
+                  }
                   setCount(newCounter);
+                  console.log("newCounter in on click:", newCounter);
                 }}
               >
                 supp a counter
