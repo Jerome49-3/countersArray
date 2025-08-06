@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 const Counter = (props) => {
   // const { classBoxCount } = props
@@ -12,39 +12,81 @@ const Counter = (props) => {
       return [];
     }
   });
+  const [total, setTotal] = useState(() => {
+    const isInStorage = localStorage.getItem("count");
+    console.log("isInStorage:", isInStorage);
+
+    if (isInStorage) {
+      return JSON.parse(isInStorage);
+    } else {
+      return [];
+    }
+  });
+  useLayoutEffect(() => {
+    let newEl = 0;
+    {
+      count.forEach((el, index) => {
+        console.log("elCount:", el);
+        newEl = newEl + el;
+        setTotal(newEl);
+      });
+    }
+  }, [count]);
 
   useEffect(() => {
     localStorage.setItem("count", JSON.stringify(count));
-  }, [count]);
+    localStorage.setItem("total", JSON.stringify(total));
+  }, [count, total]);
 
   return (
     <>
-      <div className="addACount">
-        {count.length <= 7 ? (
-          <>
-            <button
-              onClick={() => {
-                const newCounter = [...count];
-                newCounter.push(0);
-                setCount(newCounter);
-              }}
-            >
-              add a counter
-            </button>
-          </>
-        ) : (
-          <>
-            <div className="addACountFake"></div>
-          </>
-        )}
+      <div className="addSuppCounter">
+        <div className="addACount">
+          {count.length < 3 ? (
+            <>
+              <button
+                onClick={() => {
+                  const newCounter = [...count];
+                  newCounter.push(0);
+                  setCount(newCounter);
+                }}
+              >
+                add a counter
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="addACountFake"></div>
+            </>
+          )}
+        </div>
+        <div className="suppACounter">
+          {count.length > 0 ? (
+            <>
+              <button
+                onClick={() => {
+                  const newCounter = [...count];
+                  newCounter.pop(0);
+                  setCount(newCounter);
+                }}
+              >
+                supp a counter
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="suppACounterFake"></div>
+            </>
+          )}
+        </div>
       </div>
-      <div>
+      <div className="containerMapCounters">
         {count.map((counter, index) => {
           console.log("count in counter.map:", count);
           console.log("counter in counter.map:", counter);
 
           return (
-            <div key={index}>
+            <div key={index} className="boxCounters">
               {counter <= 10 && counter > 0 ? (
                 <>
                   <button
@@ -87,29 +129,23 @@ const Counter = (props) => {
                   <div className="btnFakeHide"></div>
                 </>
               )}
+              <div className="btnReset">
+                <button
+                  className="btnReset"
+                  onClick={() => {
+                    const newCount = [...count];
+                    newCount[index] = 0;
+                    setCount(newCount);
+                  }}
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           );
         })}
       </div>
-      <div className="suppACounter">
-        {count.length > 0 ? (
-          <>
-            <button
-              onClick={() => {
-                const newCounter = [...count];
-                newCounter.pop(0);
-                setCount(newCounter);
-              }}
-            >
-              supp a counter
-            </button>
-          </>
-        ) : (
-          <>
-            <div className="suppACounterFake"></div>
-          </>
-        )}
-      </div>
+      <div className="total">{total}</div>
     </>
   );
 };

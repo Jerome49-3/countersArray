@@ -79,7 +79,13 @@ main > div > div {
   gap: 20px;
   width: 300px;
 }
-
+.boxCounters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
 .container > p {
   width: 25px;
 }
@@ -105,6 +111,10 @@ div > button {
 .btnFakeHide {
   width: 30px;
   height: 30px;
+}
+.addSuppCounter {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .suppACounter > button,
 .addACount > button {
@@ -142,6 +152,19 @@ footer {
     justify-content: center;
     align-items: center;
   }
+}
+.btnReset {
+  font-size: 15px;
+  width: 50px;
+  height: 30px;
+}
+.btnReset button {
+  padding: 5px 20px 5px 20px;
+}
+.total {
+  color: #5c47d3;
+  font-size: 24px;
+  font-weight: 700;
 }
 /* BREAKPOINTS */
 
